@@ -6,7 +6,8 @@ const initialState = {
   selectedSong: "",
   likedSong: false,
   listOfLikedSongs: [],
-  playlist: []
+  playlist: [],
+  username: "",
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
