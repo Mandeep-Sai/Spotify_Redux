@@ -21,6 +21,11 @@ export default function (state = {}, action) {
             ...state.listOfLikedSongs.slice(songToRemove + 1)
           ]
         };
+      case "PALY_QUEUE":
+          return {
+            ...state,
+            playlist: state.listOfLikedSongs.concat(action.payload)
+          };
     default:
       return state;
   }
