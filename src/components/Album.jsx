@@ -17,7 +17,17 @@ const mapDispatchToProps = (dispatch) => {
         
       })
       
+    }, 
+    
+    playQueue: (track) => {
+      dispatch({
+        type: "PALY_QUEUE",
+        payload: track
+        
+      })
+      
     }
+    
   }
 }
 export class Album extends Component {
@@ -34,11 +44,17 @@ export class Album extends Component {
       "x-rapidapi-key": "49a206362dmshb20519b822912b7p1dc792jsn37f9d0304fcc"
     }
   })
+ 
   let album = await response.json()
   console.log(album)
   this.setState({album,loading : false})
   }
+  // componentDidUpdate = () =>{
+  //   this.props.playQueue(this.props.match.params.id)
+    
+  // }
   render() {
+    
     return (
       <Container fluid id='content'>
         {this.state.loading ? 
@@ -61,19 +77,24 @@ export class Album extends Component {
             </div>
             <div className="col-12  col-sm-12 col-lg-7">
               {this.state.album.tracks.data.map(track =>{
+               
                 return(
                   <div id="track">
                     <div id="trackName">
                       <a id='musicIcon'><FaMusic/></a>
+                      
                       <div>
-                        <p onClick ={()=>this.props.selectedSong(track, this.state.album.cover_medium)}>{track.title}</p>
+                      
+                        <p onClick ={()=>{this.props.selectedSong(track, this.state.album.cover_medium); 
+                                          this.props.playQueue(track)}}
+                         >{track.title}</p>
                         <Link  to={'/artists/'+track.artist.id}>
                         <p style={{opacity: "0.5"}}>{track.artist.name}</p>
                         </Link>
                       </div>
                     </div>
                     <div>
-                      <p style={{color: "white", fontSize: "12px"}}>{track.duration} s</p>
+                      <p style={{color: "white", fontSize: "12px"}}>{(track.duration/60).toFixed(2)} </p>
                     </div>
                   </div>
                 )
