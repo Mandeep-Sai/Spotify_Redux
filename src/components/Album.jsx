@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Container,Row,Spinner} from 'react-bootstrap'
+import {Container,Row,Spinner, Toast} from 'react-bootstrap'
 import {FaHeart,FaEllipsisH,FaMusic} from 'react-icons/fa'
 import{Link} from 'react-router-dom'
 import '../Album.css'
@@ -33,7 +33,9 @@ const mapDispatchToProps = (dispatch) => {
 export class Album extends Component {
   state ={
     album : [],
-    loading : true
+    loading : true,
+    showPopover: false,
+    lastTrack: undefined
   }
   componentDidMount =async()=>{
     let id = this.props.match.params.id
@@ -49,10 +51,22 @@ export class Album extends Component {
   console.log(album)
   this.setState({album,loading : false})
   }
-  // componentDidUpdate = () =>{
-  //   this.props.playQueue(this.props.match.params.id)
-    
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.cart.products.length < this.props.cart.products.length) {
+  //     this.setState({ showPopover: true }, () => {
+  //       if (this.timer) {
+  //         clearTimeout(this.timer);
+  //       }
+  //       this.timer = setTimeout(
+  //         () => this.setState({ showPopover: false }),
+  //         2500
+  //       );
+  //     });
+  //   }
   // }
+  popOverToggle = () => {
+    this.setState({ showPopover: !this.state.showPopover });
+  };
   render() {
     
     return (
@@ -79,6 +93,7 @@ export class Album extends Component {
               {this.state.album.tracks.data.map(track =>{
                
                 return(
+                  <>
                   <div id="track">
                     <div id="trackName">
                       <a id='musicIcon'><FaMusic/></a>
@@ -86,7 +101,10 @@ export class Album extends Component {
                       <div>
                       
                         <p onClick ={()=>{this.props.selectedSong(track, this.state.album.cover_medium); 
-                                          this.props.playQueue(track)}}
+                                          this.props.playQueue(track)
+                                          this.popOverToggle()
+                                          this.setState({lastTrack: track.title})
+                                          }}
                          >{track.title}</p>
                         <Link  to={'/artists/'+track.artist.id}>
                         <p style={{opacity: "0.5"}}>{track.artist.name}</p>
@@ -97,11 +115,29 @@ export class Album extends Component {
                       <p style={{color: "white", fontSize: "12px"}}>{(track.duration/60).toFixed(2)} </p>
                     </div>
                   </div>
+                
+                 </>
                 )
+                
               })}
             </div>
+            <Toast
+                   style={{ position: "absolute", top: 15, right: 15 }}
+                   show={this.state.showPopover}
+                   onClose={this.state.showPopover}
+                   
+                 >
+                   <Toast.Header>
+                     <span>
+                         { console.log(this.state.lastTrack)}
+                       <strong>{this.state.lastTrack}</strong> added to the playlist
+                     </span>
+                   </Toast.Header>
+                 </Toast>
           </Row>
+         
         )}
+       
       </Container>
     )
   }
