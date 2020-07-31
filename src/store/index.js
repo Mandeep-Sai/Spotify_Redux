@@ -4,6 +4,8 @@ import mainReducers from "../reducers";
 
 const initialState = {
   selectedSong: "",
+  likedSong: false,
+  listOfLikedSongs: []
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

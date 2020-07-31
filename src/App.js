@@ -11,19 +11,19 @@ import Album from "./components/Album";
 import searchResults from "./components/searchResults";
 
 class App extends React.Component {
-  state = {
-    song: "",
-    artist: "",
-    img: "",
-  };
-  selectedSong = (track, img) => {
-    //  console.log(img)
-    this.setState({
-      song: track.title_short,
-      artist: track.artist.name,
-      img: img,
-    });
-  };
+  // state = {
+  //   song: "",
+  //   artist: "",
+  //   img: "",
+  // };  // selectedSong = (track, img) => {
+  //   //  console.log(img)
+  //   this.setState({
+  //     song: track.title_short,
+  //     artist: track.artist.name,
+  //     img: img,
+  //   });
+  // };
+
   render() {
     return (
       <Router>
@@ -32,14 +32,14 @@ class App extends React.Component {
         <Route path="/artists/:id" component={Artist} />
         <Route
           path="/showAlbum/:id"
-          render={(props) => <Album {...props} func={this.selectedSong} />}
+          component={Album}
         />
         <Route path="/searchResults/:text" component={searchResults} />
         <Route path="/searchResults/" exact component={Home} />
         <Player
-          song={this.state.song}
-          artist={this.state.artist}
-          img={this.state.img}
+          // song={this.state.song}
+          // artist={this.state.artist}
+          // img={this.state.img}
         />
       </Router>
     );

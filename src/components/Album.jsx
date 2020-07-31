@@ -3,7 +3,23 @@ import {Container,Row,Spinner} from 'react-bootstrap'
 import {FaHeart,FaEllipsisH,FaMusic} from 'react-icons/fa'
 import{Link} from 'react-router-dom'
 import '../Album.css'
+import {connect} from 'react-redux';
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectedSong: (track, img) => {
+      dispatch({
+        type: "SELECTED_SONG",
+        payload:{
+          track, 
+          img
+        } 
+        
+      })
+      
+    }
+  }
+}
 export class Album extends Component {
   state ={
     album : [],
@@ -50,7 +66,7 @@ export class Album extends Component {
                     <div id="trackName">
                       <a id='musicIcon'><FaMusic/></a>
                       <div>
-                        <p onClick ={()=>this.props.func(track,this.state.album.cover_medium)}>{track.title}</p>
+                        <p onClick ={()=>this.props.selectedSong(track, this.state.album.cover_medium)}>{track.title}</p>
                         <Link  to={'/artists/'+track.artist.id}>
                         <p style={{opacity: "0.5"}}>{track.artist.name}</p>
                         </Link>
@@ -70,4 +86,4 @@ export class Album extends Component {
   }
 }
 
-export default Album
+export default connect(null, mapDispatchToProps)(Album)
