@@ -124,7 +124,7 @@ class SideBar extends React.Component {
                   />
                 </Col>
                 <Col>
-                  <Form.Control placeholder="password" />
+                  <Form.Control placeholder="password" type="password" />
                 </Col>
               </Form.Row>
             </Form>

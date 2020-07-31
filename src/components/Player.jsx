@@ -39,19 +39,20 @@ class Player extends Component {
             <p id="singer">{this.props.selectedSong.track.artist.name}</p>
             {/* <a><FaHeart style={{color: "white"}}/></a> */}
           </div>
-          {this.props.listOfLikedSongs.includes(this.props.selectedSong.track.title) ?  <a><FaHeart style={{color: "green"}} onClick={()=>this.props.unliked_Song(this.props.selectedSong.track.title)}/></a> : 
-            <a><FaHeart style={{color: "white"}} onClick={()=>this.props.liked_Song(this.props.selectedSong.track.title)}/></a>}
+          {this.props.listOfLikedSongs.includes(this.props.selectedSong.track.title) ?  <a><FaHeart style={{color: "green", cursor: 'pointer'}} onClick={()=>this.props.unliked_Song(this.props.selectedSong.track.title)}/></a> : 
+            <a><FaHeart style={{color: "white", cursor: 'pointer'}} onClick={()=>this.props.liked_Song(this.props.selectedSong.track.title)}/></a>}
          
           {/* <i className="fas fa-laptop"></i> */}
         </div>
         ) :(
           <div id="songInfo">
-          <img className='img-fluid songImage' src='https://placehold.it/50x50' alt=""/>
+          {/* <img className='img-fluid songImage' src='https://placehold.it/50x50' alt=""/> */}
           <div id="song">
-            <p id="songName">Say So</p>
-            <p id="singer">Doja Cat</p>
+            {/* <p id="songName">Say So</p> */}
+            {/* <p id="singer">Doja Cat</p> */}
+            
           </div>
-          <i className="far fa-heart"></i>
+          {/* <p><FaHeart/></p> */}
           <i className="fas fa-laptop"></i>
         </div>
         )}
