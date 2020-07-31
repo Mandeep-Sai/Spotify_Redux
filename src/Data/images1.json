@@ -1,0 +1,26 @@
+[
+  {
+    "name":"Italian Karaoke",
+    "img" : "/images/first/karaoke.png"
+  },
+  {
+    "name":"Lyricist's",
+    "img" : "/images/first/lyricist.png"
+  },
+  {
+    "name":"Italian Frequent Rotation",
+    "img" : "/images/first/Italy rotation.png"
+  },
+  {
+    "name":"00s Italy",
+    "img" : "/images/first/italy00s.png"
+  },
+  {
+    "name":"Cocktail Hour",
+    "img" : "/images/first/cocktail.png"
+  },
+  {
+    "name":"I Love My '90s Hip-Hop",
+    "img" : "/images/first/hiphop.png"
+  }
+]
