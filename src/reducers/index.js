@@ -30,7 +30,6 @@ export default function (state = {}, action) {
       };
       
       case "PALY_QUEUE":
-        // const languageCodes = state.listOfLikedSongs.map(language => language.code);
           return {
             ...state,
             playlist: state.playlist.concat(action.payload)
