@@ -1,7 +1,7 @@
 import React from 'react'
 import {FaSpotify,FaSearch,FaHome,FaBookOpen} from 'react-icons/fa'
 import { IconContext } from "react-icons";
-import {Form,FormControl,Button,Modal} from 'react-bootstrap'
+import {Form,FormControl,Button,Modal, Col, Row} from 'react-bootstrap'
 import {withRouter, Link} from 'react-router-dom'
 
 
@@ -59,9 +59,9 @@ class SideBar extends React.Component {
           </ul>
           <div id="buttons">
             <div id="signUp">
-              <Link to='/signup'>
+              {/* <Link to='/signup'> */}
                 <button type="button" onClick={this.handleShow} className="btn btn-block"><p>SIGN UP</p></button>
-              </Link>
+              {/* </Link> */}
             </div>
             <div id="login">
               <button type="button" className="btn btn-block"><p>LOGIN</p></button>
@@ -78,7 +78,7 @@ class SideBar extends React.Component {
             </div>
           </div>
     </nav>
-     {/* <Modal
+     <Modal
         show={this.state.show}
         onHide={this.handleClose}
         backdrop="static"
@@ -88,13 +88,22 @@ class SideBar extends React.Component {
           <Modal.Title >Sign Up</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          I will not close if you click outside me. Don't even try to press
-          escape key.
+        <Form>
+          <Form.Row>
+            <Col >
+              <Form.Control placeholder="username" type="text"/>
+            </Col>
+            <Col>
+              <Form.Control placeholder="password" />
+            </Col>
+            
+          </Form.Row>
+        </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary">Sign Up</Button>
         </Modal.Footer>
-      </Modal> */}
+      </Modal>
   </>
   )
 }

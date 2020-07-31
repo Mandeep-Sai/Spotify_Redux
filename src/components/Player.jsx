@@ -39,7 +39,7 @@ class Player extends Component {
             <p id="singer">{this.props.selectedSong.track.artist.name}</p>
             {/* <a><FaHeart style={{color: "white"}}/></a> */}
           </div>
-          {this.props.likedSong ?  <a><FaHeart style={{color: "green"}} onClick={()=>this.props.unliked_Song(this.props.selectedSong.track.title)}/></a> : 
+          {this.props.listOfLikedSongs.includes(this.props.selectedSong.track.title) ?  <a><FaHeart style={{color: "green"}} onClick={()=>this.props.unliked_Song(this.props.selectedSong.track.title)}/></a> : 
             <a><FaHeart style={{color: "white"}} onClick={()=>this.props.liked_Song(this.props.selectedSong.track.title)}/></a>}
          
           {/* <i className="fas fa-laptop"></i> */}
