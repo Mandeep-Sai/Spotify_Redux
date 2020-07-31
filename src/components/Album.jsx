@@ -138,7 +138,7 @@ export class Album extends Component {
               })}
             </div>
             <Toast
-              style={{ position: "absolute", top: 15, right: 15 }}
+              style={{ position: "fixed", top: 15, right: 15 }}
               show={this.state.showPopover}
               onClose={this.popOverToggle}
             >
