@@ -73,7 +73,7 @@ class Carsl extends React.Component {
                   </Link>
                 )}
                 {this.props.type === "playlists" && (
-                  <Link to={"/playlists/"}>
+                  <Link to={`/playlist/${element.id}`}>
                     <img src={element.picture_medium} alt="" />
                     <p className="cardBody">{element.title}</p>
                   </Link>

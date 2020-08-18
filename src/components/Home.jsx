@@ -8,9 +8,6 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
-import images1 from "../Data/images1.json";
-import images2 from "../Data/images2.json";
-import DefaultRow from "./DefaultRow";
 import Carsl from "./Carsl";
 
 export class Home extends Component {
@@ -53,9 +50,9 @@ export class Home extends Component {
             type="albums"
           />
           <Carsl
-            link="https://api.deezer.com/chart/0/podcasts"
-            heading="Top Podcasts"
-            type="podcasts"
+            link="https://api.deezer.com/chart/0/artists"
+            heading="Top Artists"
+            type="artists"
           />
           <Carsl
             link="https://api.deezer.com/chart/0/playlists"
@@ -63,9 +60,9 @@ export class Home extends Component {
             type="playlists"
           />
           <Carsl
-            link="https://api.deezer.com/chart/0/artists"
-            heading="Top Artists"
-            type="artists"
+            link="https://api.deezer.com/chart/0/podcasts"
+            heading="Top Podcasts"
+            type="podcasts"
           />
         </Container>
       </div>
