@@ -1,99 +1,101 @@
-import React from 'react'
-import {Container} from 'react-bootstrap'
-import Carousel from 'react-multi-carousel'
-import 'react-multi-carousel/lib/styles.css'
-import {Link} from 'react-router-dom'
+import React from "react";
+import { Container } from "react-bootstrap";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const responsive = {
-  desktop:{
-    breakpoint :{max:3000, min:1024},
-    items : 7
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 7,
   },
-  mobile:{
-    breakpoint :{max:1024, min:464},
-    items : 3
-  }
-}
+  mobile: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 3,
+  },
+};
 
-class Carsl extends React.Component{
-  constructor(props){
-    super(props)
-    this.state ={
-      songs:[],
-      artistId:''
-    }
+class Carsl extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      artistId: "",
+    };
   }
-  componentDidMount=async()=>{
-    console.log('hello')
-    let name = this.props.name.toLowerCase();
-    let response = await fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q="+name, {
-      "method": "GET",
-      "headers": {
-      "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-      "x-rapidapi-key": "49a206362dmshb20519b822912b7p1dc792jsn37f9d0304fcc"
-    }
-  })
-    let parsedJson = await response.json()
-    let songs = parsedJson.data
-    console.log(songs)
-    let artistId = parsedJson.data[0].artist.id
-    this.setState({songs,artistId})
-  }
-  componentDidUpdate = async(prevProps)=>{
-    if(prevProps.name !== this.props.name){
-      let name = this.props.name.toLowerCase();
-      let response = await fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q="+name, {
-        "method": "GET",
-        "headers": {
-        "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-        "x-rapidapi-key": "49a206362dmshb20519b822912b7p1dc792jsn37f9d0304fcc"
-      }
-    })
-      let parsedJson = await response.json()
-      let songs = parsedJson.data
+  componentDidMount = async () => {
+    let link = this.props.link.toLowerCase();
+    let response = await fetch(`https://cors-anywhere.herokuapp.com/${link}`);
 
-      this.setState({songs})
+    let parsedJson = await response.json();
+    let data = parsedJson.data;
+    this.setState({ data });
+  };
+  componentDidUpdate = async (prevProps) => {
+    if (prevProps.name !== this.props.name) {
+      let link = this.props.link.toLowerCase();
+      let response = await fetch(`https://cors-anywhere.herokuapp.com/${link}`);
+
+      let parsedJson = await response.json();
+      let data = parsedJson.data;
+      this.setState({ data });
     }
-  }
-  render(){
-    return(
-      <Container fluid className='crsl mt-3 mb-3'>
-        {this.props.for !== 'search' ? null : (
-          <Link to={'/artists/'+this.state.artistId}>
-          <p >Search Results for "{this.props.name}"</p>
-          </Link>
-        )}
-        {this.props.for === 'artist' ? null : (
-          <Link to={'/artists/'+this.state.artistId}>
-          <p >{this.props.name}</p>
-          </Link>
-        )}
+  };
+  render() {
+    return (
+      <Container fluid className="crsl mt-3 mb-3">
+        <p>{this.props.heading}</p>
         <Carousel
-         ssr={true} // means to render carousel on server-side.
-        //  infinite={true}
-        //  autoPlay={this.props.deviceType !== "mobile" ? true : false}
-         autoPlaySpeed={2000}
-         swipeable={false}
-         draggable={false}
-        //  showDots={true}
-         responsive = {responsive}
-         className ='carouselContent'
-         >
-          {this.state.songs.map(song =>{
-            return(
-            <div className='col'>
-              <Link to={'/ShowAlbum/'+song.album.id}>
-                <img src={song.album.cover} alt=""/>
-                {this.props.for === 'artist' ? <p class="cardBody">{song.album.title}</p> : 
-                  <p className="cardBody">{song.title}</p>
-                }
-              </Link>
-            </div>
-            )
+          ssr={true} // means to render carousel on server-side.
+          //  infinite={true}
+          //  autoPlay={this.props.deviceType !== "mobile" ? true : false}
+          autoPlaySpeed={2000}
+          swipeable={false}
+          draggable={false}
+          //  showDots={true}
+          responsive={responsive}
+          className="carouselContent"
+        >
+          {this.state.data.map((element) => {
+            return (
+              <div className="col">
+                {this.props.type === "albums" && (
+                  <Link to={`/ShowAlbum/${element.id}`}>
+                    <img src={element.cover_medium} alt="" />
+                    <p className="cardBody">{element.title}</p>
+                  </Link>
+                )}
+                {this.props.type === "podcasts" && (
+                  <Link to={"/podcasts/"}>
+                    <img src={element.picture_medium} alt="" />
+                    <p className="cardBody">{element.title}</p>
+                  </Link>
+                )}
+                {this.props.type === "playlists" && (
+                  <Link to={`/playlist/${element.id}`}>
+                    <img src={element.picture_medium} alt="" />
+                    <p className="cardBody">{element.title}</p>
+                  </Link>
+                )}
+                {this.props.type === "artists" && (
+                  <Link to={`/artists/${element.id}`}>
+                    <img src={element.picture_medium} alt="" />
+                    <p className="cardBody">{element.name}</p>
+                  </Link>
+                )}
+                {this.props.type === "artistInfo" && (
+                  <Link to={`/showAlbum/${element.id}`}>
+                    <img src={element.cover_medium} alt="" />
+                    <p className="cardBody">{element.title}</p>
+                  </Link>
+                )}
+              </div>
+            );
           })}
         </Carousel>
       </Container>
-    )
+    );
   }
 }
-export default Carsl
+export default Carsl;

@@ -1,5 +1,4 @@
-
-#artistContent{
+#artistContent {
   height: 91vh;
   font-family: "Montserrat";
   position: absolute;
@@ -11,10 +10,10 @@
   /* background: linear-gradient(142deg, rgba(35,66,103,1) 0%, rgba(4,9,14,1) 94%) !important; */
   overflow: auto;
 }
-#contentHeader{
+#contentHeader {
   width: 100%;
   min-height: 40vh;
-  
+
   background-position: center;
   background-size: cover;
   /* box-shadow: inset 50px 0px 30px 30px rgba(0, 0, 0, 0.5); */
@@ -27,7 +26,7 @@
   position: absolute;
   z-index: -5;
 }
-#artistName{
+#artistName {
   height: 30vh;
   display: flex;
   flex-direction: column;
@@ -35,72 +34,80 @@
   align-items: center;
   justify-content: center;
 }
-#artistName p{
+#artistName p {
   margin-bottom: 5px;
 }
-#headerButtons button{
+#headerButtons button {
   width: 120px;
   border-radius: 40px;
   background-color: none;
   font-size: 10px;
 }
-#headerButtons button:first-of-type{
+#headerButtons button:first-of-type {
   background-color: rgb(26, 207, 90) !important;
   color: white;
   font-weight: 600;
 }
-#headerButtons button:nth-of-type(2){
+#headerButtons button:nth-of-type(2) {
   border: 2px solid white;
   color: white;
   font-weight: 600;
 }
-#headerButtons > *{
+#headerButtons > * {
   padding: 5px 10px;
   margin-right: 10px;
 }
-#info{
+#info {
   overflow: auto;
 }
-#info nav{
+#info nav {
   display: flex;
   justify-content: center;
 }
-#info nav p{
+#info nav p {
   padding: 10px 10px;
   font-size: 10px;
   letter-spacing: 0.2rem;
   color: white;
   font-weight: 600;
 }
-#shadow{
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #181818 10%) !important;
+#shadow {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    #181818 10%
+  ) !important;
   transform: translateY(-60px);
   min-height: 51vh;
 }
-#albumCards{
+#albumCards {
   width: 90%;
+  margin-top: 30px;
 }
-#albumCards .col p{
+#albumCards .col:hover {
+  cursor: pointer;
+}
+#albumCards .col p {
   font-size: 9px;
   text-align: center;
   font-weight: 600;
   color: white;
 }
-#albumCards .col .cardBody{
+#albumCards .col .cardBody {
   background-color: #181818;
   margin-bottom: 0px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
-#albumCards .col img{
+#albumCards .col img {
   height: 120px;
   object-fit: cover;
 }
-#albumCards .card{
+#albumCards .card {
   border-radius: 0 !important;
   border: none !important;
 }
-.carouselContent{
+.carouselContent {
   margin-left: -10px;
 }

@@ -5,22 +5,9 @@ import { Link } from "react-router-dom";
 import "../Album.css";
 import { connect } from "react-redux";
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    selectedSong: (track, img) => {
-      dispatch({
-        type: "SELECTED_SONG",
-        payload: {
-          track,
-          img,
-        },
-      });
-    },
-  };
-};
 export class Album extends Component {
   state = {
-    album: [],
+    data: [],
     loading: true,
     showPopover: false,
     lastTrack: undefined,
@@ -28,7 +15,7 @@ export class Album extends Component {
   componentDidMount = async () => {
     let id = this.props.match.params.id;
     let response = await fetch(
-      "https://deezerdevs-deezer.p.rapidapi.com/album/" + id,
+      "https://deezerdevs-deezer.p.rapidapi.com/playlist/" + id,
       {
         method: "GET",
         headers: {
@@ -39,9 +26,9 @@ export class Album extends Component {
       }
     );
 
-    let album = await response.json();
-    console.log(album);
-    this.setState({ album, loading: false });
+    let data = await response.json();
+    console.log(data);
+    this.setState({ data, loading: false });
   };
 
   popOverToggle = () => {
@@ -68,15 +55,14 @@ export class Album extends Component {
           <Row>
             <div className="col-12 col-sm-12 col-lg-4">
               <div id="albumInfo">
-                <img src={this.state.album.cover_medium} alt="" />
-                <p>{this.state.album.title}</p>
-                <p>{this.state.album.artist.name}</p>
+                <img src={this.state.data.picture_medium} alt="" />
+                <p>{this.state.data.title}</p>
+                <p>{this.state.data.creator.name}</p>
                 <button type="button" class="btn ">
                   PLAY
                 </button>
                 <p>
-                  {this.state.album.fans} FOLLOWERS .{" "}
-                  {this.state.album.nb_tracks}
+                  {this.state.data.fans} FOLLOWERS . {this.state.data.nb_tracks}
                 </p>
                 <div id="icons">
                   <a>
@@ -89,7 +75,7 @@ export class Album extends Component {
               </div>
             </div>
             <div className="col-12  col-sm-12 col-lg-7">
-              {this.state.album.tracks.data.map((track) => {
+              {this.state.data.tracks.data.map((track) => {
                 return (
                   <>
                     <div id="track">
@@ -103,10 +89,10 @@ export class Album extends Component {
                             onClick={() => {
                               this.props.selectedSong(
                                 track,
-                                this.state.album.cover_medium
+                                this.state.data.cover_medium
                               );
-                              // this.props.playQueue(track);
-                              // this.showToaster(track.title);
+                              this.props.playQueue(track);
+                              this.showToaster(track.title);
                               // this.popOverToggle()
                               // this.setState({lastTrack: track.title})
                             }}
@@ -149,4 +135,4 @@ export class Album extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Album);
+export default connect(null, null)(Album);
