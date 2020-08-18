@@ -157,7 +157,7 @@
   font-size: 26px;
 }
 #trackLength {
-  height: 5px !important;
+  height: 2px !important;
   width: 400px;
   margin-top: 10px;
   border-radius: 5px;
@@ -184,6 +184,7 @@
 .time p {
   margin: 0;
   padding: 0 5px;
+  margin-top: -2px !important;
 }
 .songImage {
   width: 50px;

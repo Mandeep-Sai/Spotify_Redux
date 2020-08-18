@@ -16,13 +16,6 @@ const mapDispatchToProps = (dispatch) => {
         },
       });
     },
-
-    playQueue: (track) => {
-      dispatch({
-        type: "PALY_QUEUE",
-        payload: track,
-      });
-    },
   };
 };
 export class Album extends Component {
@@ -112,8 +105,8 @@ export class Album extends Component {
                                 track,
                                 this.state.album.cover_medium
                               );
-                              this.props.playQueue(track);
-                              this.showToaster(track.title);
+                              // this.props.playQueue(track);
+                              // this.showToaster(track.title);
                               // this.popOverToggle()
                               // this.setState({lastTrack: track.title})
                             }}
