@@ -14,14 +14,15 @@ const mapDispatchToProps = (dispatch) => {
         type: "LOAD_USER",
         payload: name,
       }),
-    createPlaylist: (name) => dispatch(addplaylist(name)),
+    createPlaylist: (playlists) => dispatch(addplaylist(playlists)),
   };
 };
-const addplaylist = (name) => {
+const addplaylist = (playlists) => {
+  console.log(playlists);
   return async (dispatch, getState) => {
     dispatch({
       type: "ADD_PLAYLIST",
-      payload: { ...name },
+      payload: playlists,
     });
   };
 };
@@ -43,6 +44,7 @@ class SideBar extends React.Component {
     username: "",
     showPlaylistModal: false,
     playlistName: "",
+    playlists: "",
   };
   searchQuery = (e) => {
     let query = e.currentTarget.value;
@@ -58,6 +60,16 @@ class SideBar extends React.Component {
   };
   handlePlaylistNameChange = (e) => {
     this.setState({ playlistName: e.currentTarget.value });
+  };
+  createPlaylistHandler = (e) => {
+    let playlist = {
+      name: this.state.playlistName,
+      songs: [],
+    };
+    this.setState({ playlists: { ...playlist } });
+    setTimeout(() => {
+      this.props.createPlaylist(this.state.playlists);
+    }, 1000);
   };
   render() {
     return (
@@ -158,11 +170,7 @@ class SideBar extends React.Component {
               <p>Name</p>
               <input type="text" onChange={this.handlePlaylistNameChange} />
             </div>
-            <button
-              onClick={() => this.props.createPlaylist(this.state.playlistName)}
-            >
-              Create
-            </button>
+            <button onClick={this.createPlaylistHandler}>Create</button>
           </div>
         </Modal>
         {/*
