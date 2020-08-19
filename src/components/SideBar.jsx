@@ -1,9 +1,11 @@
 import React from "react";
 import { FaSpotify, FaSearch, FaHome, FaBookOpen } from "react-icons/fa";
+import { AiOutlinePlusCircle, AiOutlineClose } from "react-icons/ai";
 import { IconContext } from "react-icons";
-import { Form, FormControl, Button, Modal, Col, Row } from "react-bootstrap";
+import { Form, FormControl, Button, Col, Row } from "react-bootstrap";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
+import Modal from "react-modal";
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -12,27 +14,50 @@ const mapDispatchToProps = (dispatch) => {
         type: "LOAD_USER",
         payload: name,
       }),
+    createPlaylist: (name) => dispatch(addplaylist(name)),
   };
+};
+const addplaylist = (name) => {
+  return async (dispatch, getState) => {
+    dispatch({
+      type: "ADD_PLAYLIST",
+      payload: { ...name },
+    });
+  };
+};
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    borderRadius: "20px",
+  },
 };
 
 class SideBar extends React.Component {
   state = {
     query: "",
     username: "",
+    showPlaylistModal: false,
+    playlistName: "",
   };
   searchQuery = (e) => {
     let query = e.currentTarget.value;
     console.log(query);
     this.props.history.push("/searchResults/" + query);
   };
-  handleShow = () => {
-    this.setState({ show: true });
-  };
+
   handleClose = () => {
-    this.setState({ show: false });
+    this.setState({ showPlaylistModal: false });
   };
   updateUser = (e) => {
     this.setState({ username: e.currentTarget.value });
+  };
+  handlePlaylistNameChange = (e) => {
+    this.setState({ playlistName: e.currentTarget.value });
   };
   render() {
     return (
@@ -75,6 +100,14 @@ class SideBar extends React.Component {
               {/* <Button variant="outline-success"><FaSearch/></Button> */}
             </Form>
           </ul>
+          <div id="playlists">
+            <div>
+              <AiOutlinePlusCircle
+                onClick={() => this.setState({ showPlaylistModal: true })}
+              />
+              <p>Playlists</p>
+            </div>
+          </div>
           <div id="buttons">
             <div id="signUp">
               {/* <Link to='/signup'> */}
@@ -104,6 +137,35 @@ class SideBar extends React.Component {
             </div>
           </div>
         </nav>
+        <Modal
+          isOpen={this.state.showPlaylistModal}
+          onRequestClose={() =>
+            this.setState({
+              showPlaylistModal: false,
+            })
+          }
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <div id="playlistModal">
+            <div id="heading">
+              <div style={{ fontSize: "20px", fontWeight: "650" }}>
+                Create a new playlist
+              </div>
+              <AiOutlineClose onClick={this.handleClose} />
+            </div>
+            <div id="inputSection">
+              <p>Name</p>
+              <input type="text" onChange={this.handlePlaylistNameChange} />
+            </div>
+            <button
+              onClick={() => this.props.createPlaylist(this.state.playlistName)}
+            >
+              Create
+            </button>
+          </div>
+        </Modal>
+        {/*
         <Modal
           show={this.state.show}
           onHide={this.handleClose}
@@ -141,6 +203,7 @@ class SideBar extends React.Component {
             </Button>
           </Modal.Footer>
         </Modal>
+            */}
       </>
     );
   }

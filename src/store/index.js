@@ -4,9 +4,8 @@ import mainReducers from "../reducers";
 
 const initialState = {
   selectedSong: "",
-  likedSong: false,
   listOfLikedSongs: [],
-  playlist: [],
+  playlists: [],
   username: "",
 };
 

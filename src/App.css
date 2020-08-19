@@ -38,6 +38,81 @@
   padding-top: 5px;
   font-size: 20px;
 }
+#sidebar #playlists {
+  padding: 0px 20px;
+}
+#sidebar #playlists > div:first-of-type {
+  display: flex;
+  justify-content: center;
+}
+#sidebar #playlists > div:first-of-type svg {
+  margin: 5px 0px 0px -15px;
+  font-size: 16px;
+}
+#sidebar #playlists > div:first-of-type svg:hover {
+  cursor: pointer;
+}
+#sidebar #playlists > div:first-of-type p {
+  margin-left: 10px;
+}
+#sidebar #playlistModal {
+  padding: 20px;
+}
+#playlistModal #heading {
+  display: flex;
+  justify-content: space-between;
+}
+#playlistModal #heading svg {
+  font-size: 20px;
+  margin-top: 3px;
+}
+#playlistModal #heading svg:hover {
+  cursor: pointer;
+}
+#playlistModal #inputSection {
+  display: flex;
+  padding: 20px 0px 0px 0px;
+}
+#playlistModal #inputSection p {
+  margin: 0px;
+  margin-top: 5px;
+}
+#playlistModal #inputSection input {
+  margin-left: 15px;
+  width: 100%;
+  height: 40px;
+}
+#playlistModal #inputSection input:focus {
+  outline: none;
+}
+#playlistModal button {
+  margin: 30px 0px 0px 38%;
+  width: 90px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-weight: 650;
+  background-color: rgb(26, 207, 90);
+}
+.ReactModal__Content {
+  border-radius: 10px !important;
+  width: 400px !important;
+  color: white !important;
+  background-color: black !important;
+}
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 1000ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
 #buttons {
   margin-top: auto;
 }

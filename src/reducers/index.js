@@ -28,12 +28,11 @@ export default function (state = {}, action) {
         ...state,
         username: action.payload,
       };
-      
-      case "PALY_QUEUE":
-          return {
-            ...state,
-            playlist: state.playlist.concat(action.payload)
-          };
+    case "ADD_PLAYLIST":
+      return {
+        ...state,
+        playlists: [...state.playlists.concat(action.payload)],
+      };
     default:
       return state;
   }
