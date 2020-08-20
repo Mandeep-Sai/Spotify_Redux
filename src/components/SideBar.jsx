@@ -7,6 +7,8 @@ import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Modal from "react-modal";
 
+const mapStateToProps = (state) => state;
+
 const mapDispatchToProps = (dispatch) => {
   return {
     loadUser: (name) =>
@@ -70,6 +72,7 @@ class SideBar extends React.Component {
     setTimeout(() => {
       this.props.createPlaylist(this.state.playlists);
     }, 1000);
+    this.setState({ showPlaylistModal: false });
   };
   render() {
     return (
@@ -118,6 +121,11 @@ class SideBar extends React.Component {
                 onClick={() => this.setState({ showPlaylistModal: true })}
               />
               <p>Playlists</p>
+            </div>
+            <div>
+              {this.props.playlists.length > 0
+                ? this.props.playlists.map((playlist) => <p>{playlist.name}</p>)
+                : null}
             </div>
           </div>
           <div id="buttons">
@@ -216,4 +224,4 @@ class SideBar extends React.Component {
     );
   }
 }
-export default connect(null, mapDispatchToProps)(SideBar);
+export default connect(mapStateToProps, mapDispatchToProps)(SideBar);

@@ -4,6 +4,7 @@ import { FaHeart, FaEllipsisH, FaMusic } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "../Album.css";
 import { connect } from "react-redux";
+const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -14,6 +15,12 @@ const mapDispatchToProps = (dispatch) => {
           track,
           img,
         },
+      });
+    },
+    addSongToPlaylist: (songName, playlistName) => {
+      dispatch({
+        type: "ADD_SONG_TO_PLAYLIST",
+        payload: { songName, playlistName },
       });
     },
   };
@@ -42,6 +49,7 @@ export class Album extends Component {
     let album = await response.json();
     console.log(album);
     this.setState({ album, loading: false });
+    this.props.addSongToPlaylist("abc", "man");
   };
 
   popOverToggle = () => {
@@ -149,4 +157,4 @@ export class Album extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Album);
+export default connect(mapStateToProps, mapDispatchToProps)(Album);

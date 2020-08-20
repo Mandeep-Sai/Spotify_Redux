@@ -33,6 +33,23 @@ export default function (state = {}, action) {
         ...state,
         playlists: [...state.playlists.concat(action.payload)],
       };
+    case "ADD_SONG_TO_PLAYLIST":
+      const playlistIndex = state.playlists.findIndex(
+        (obj) => obj.name === action.payload.playlistName
+      );
+      let selectedPlaylist = state.playlists[playlistIndex];
+      console.log(selectedPlaylist);
+      console.log(selectedPlaylist.songs);
+      selectedPlaylist.songs.push(action.payload.songName);
+      console.log(selectedPlaylist);
+      return {
+        ...state,
+        playlists: [
+          ...state.playlists.slice(0, playlistIndex),
+          ...state.playlists.slice(playlistIndex + 1),
+          selectedPlaylist,
+        ],
+      };
     default:
       return state;
   }
