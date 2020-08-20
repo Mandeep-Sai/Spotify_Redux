@@ -38,10 +38,7 @@ export default function (state = {}, action) {
         (obj) => obj.name === action.payload.playlistName
       );
       let selectedPlaylist = state.playlists[playlistIndex];
-      console.log(selectedPlaylist);
-      console.log(selectedPlaylist.songs);
       selectedPlaylist.songs.push(action.payload.songName);
-      console.log(selectedPlaylist);
       return {
         ...state,
         playlists: [

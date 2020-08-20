@@ -178,7 +178,7 @@ export class Album extends Component {
                                         onClick={() =>
                                           this.addSongToPlaylist(
                                             playlist.name,
-                                            track.title
+                                            track
                                           )
                                         }
                                       >

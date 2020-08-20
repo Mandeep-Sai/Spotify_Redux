@@ -10,6 +10,7 @@ import Artist from "./components/Artist";
 import Album from "./components/Album";
 import searchResults from "./components/searchResults";
 import Playlist from "./components/Playlist";
+import OwnPlaylist from "./components/OwnPlaylist";
 
 class App extends React.Component {
   // state = {
@@ -32,6 +33,7 @@ class App extends React.Component {
         <Route path="/" exact component={Home} />
         <Route path="/artists/:id" component={Artist} />
         <Route path="/playlist/:id" component={Playlist} />
+        <Route path="/ownplaylist/:name" component={OwnPlaylist} />
         <Route path="/showAlbum/:id" component={Album} />
         <Route path="/searchResults/:text" component={searchResults} />
         <Route path="/searchResults/" exact component={Home} />

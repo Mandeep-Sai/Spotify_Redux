@@ -4,43 +4,40 @@ import { FaHeart, FaEllipsisH, FaMusic } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "../Album.css";
 import { connect } from "react-redux";
+const mapStateToProps = (state) => state;
 
-export class Playlist extends Component {
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectedSong: (track, img) => {
+      dispatch({
+        type: "SELECTED_SONG",
+        payload: {
+          track,
+          img,
+        },
+      });
+    },
+  };
+};
+
+class OwnPlaylist extends Component {
   state = {
     data: [],
     loading: true,
-    showPopover: false,
     lastTrack: undefined,
   };
   componentDidMount = async () => {
-    let id = this.props.match.params.id;
-    let response = await fetch(
-      "https://deezerdevs-deezer.p.rapidapi.com/playlist/" + id,
-      {
-        method: "GET",
-        headers: {
-          "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-          "x-rapidapi-key":
-            "49a206362dmshb20519b822912b7p1dc792jsn37f9d0304fcc",
-        },
-      }
+    console.log(this.props.playlists);
+    let data = this.props.playlists.filter(
+      (playlist) => playlist.name === this.props.match.params.name
     );
-
-    let data = await response.json();
+    this.setState({ data: data[0], loading: false });
     console.log(data);
-    this.setState({ data, loading: false });
   };
 
-  popOverToggle = () => {
-    this.setState({ showPopover: !this.state.showPopover });
-  };
-  showToaster = (name) => {
-    this.setState({ showPopover: true, lastTrack: name });
-    setTimeout(() => {
-      this.setState({ showPopover: false });
-    }, 1000);
-  };
   render() {
+    const img =
+      "https://assets-global.website-files.com/5deef90e2b03a42deaf1f5f9/5dfbc118b074186ea74e058b_Music-Playlist_Octiive-Blog-Post-Feat-Image.jpg";
     return (
       <Container fluid id="content">
         {this.state.loading ? (
@@ -55,15 +52,15 @@ export class Playlist extends Component {
           <Row>
             <div className="col-12 col-sm-12 col-lg-4">
               <div id="albumInfo">
-                <img src={this.state.data.picture_medium} alt="" />
-                <p>{this.state.data.title}</p>
-                <p>{this.state.data.creator.name}</p>
+                <img
+                  src="https://assets-global.website-files.com/5deef90e2b03a42deaf1f5f9/5dfbc118b074186ea74e058b_Music-Playlist_Octiive-Blog-Post-Feat-Image.jpg"
+                  alt=""
+                />
+                {/*<img src={this.state.data.songs[0].picture_medium} alt="" />*/}
+                <p>{this.state.data.name}</p>
                 <button type="button" class="btn ">
                   PLAY
                 </button>
-                <p>
-                  {this.state.data.fans} FOLLOWERS . {this.state.data.nb_tracks}
-                </p>
                 <div id="icons">
                   <a>
                     <FaHeart />
@@ -75,7 +72,7 @@ export class Playlist extends Component {
               </div>
             </div>
             <div className="col-12  col-sm-12 col-lg-7">
-              {this.state.data.tracks.data.map((track) => {
+              {this.state.data.songs.map((track) => {
                 return (
                   <>
                     <div id="track">
@@ -87,12 +84,8 @@ export class Playlist extends Component {
                         <div>
                           <p
                             onClick={() => {
-                              this.props.selectedSong(
-                                track,
-                                this.state.data.cover_medium
-                              );
-                              this.props.playQueue(track);
-                              this.showToaster(track.title);
+                              this.props.selectedSong(track, img);
+
                               // this.popOverToggle()
                               // this.setState({lastTrack: track.title})
                             }}
@@ -116,18 +109,6 @@ export class Playlist extends Component {
                 );
               })}
             </div>
-            <Toast
-              style={{ position: "fixed", top: 15, right: 15 }}
-              show={this.state.showPopover}
-              onClose={this.popOverToggle}
-            >
-              <Toast.Header>
-                <span>
-                  {console.log(this.state.lastTrack)}
-                  <strong>{this.state.lastTrack}</strong> added to the playlist
-                </span>
-              </Toast.Header>
-            </Toast>
           </Row>
         )}
       </Container>
@@ -135,4 +116,4 @@ export class Playlist extends Component {
   }
 }
 
-export default connect(null, null)(Playlist);
+export default connect(mapStateToProps, mapDispatchToProps)(OwnPlaylist);

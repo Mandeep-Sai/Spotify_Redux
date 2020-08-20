@@ -57,6 +57,12 @@
   margin-left: 0px;
   margin-top: 5px;
 }
+#sidebar #playlists a {
+  color: white !important;
+}
+#sidebar #playlists a:hover {
+  text-decoration: none;
+}
 #sidebar #playlistModal {
   padding: 20px;
 }

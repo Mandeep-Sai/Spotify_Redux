@@ -124,7 +124,12 @@ class SideBar extends React.Component {
             </div>
             <div>
               {this.props.playlists.length > 0
-                ? this.props.playlists.map((playlist) => <p>{playlist.name}</p>)
+                ? this.props.playlists.map((playlist) => (
+                    <Link to={`/ownplaylist/${playlist.name}`}>
+                      {" "}
+                      <p>{playlist.name}</p>
+                    </Link>
+                  ))
                 : null}
             </div>
           </div>
