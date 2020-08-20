@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Container, Row, Spinner, Toast } from "react-bootstrap";
+import { Container, Row, Spinner, Toast, Dropdown } from "react-bootstrap";
 import { FaHeart, FaEllipsisH, FaMusic } from "react-icons/fa";
+import { MdKeyboardArrowLeft } from "react-icons/md";
 import { Link } from "react-router-dom";
 import "../Album.css";
 import { connect } from "react-redux";
@@ -31,6 +32,7 @@ export class Album extends Component {
     loading: true,
     showPopover: false,
     lastTrack: undefined,
+    showPlaylists: false,
   };
   componentDidMount = async () => {
     let id = this.props.match.params.id;
@@ -49,7 +51,7 @@ export class Album extends Component {
     let album = await response.json();
     console.log(album);
     this.setState({ album, loading: false });
-    this.props.addSongToPlaylist("abc", "man");
+    // this.props.addSongToPlaylist("abc", "man");
   };
 
   popOverToggle = () => {
@@ -60,6 +62,15 @@ export class Album extends Component {
     setTimeout(() => {
       this.setState({ showPopover: false });
     }, 1000);
+  };
+  showPlaylistsHandler = (e) => {
+    this.setState({ showPlaylists: true });
+  };
+  hidePlaylistsHandler = () => {
+    this.setState({ showPlaylists: false });
+  };
+  addSongToPlaylist = (playlistName, songName) => {
+    this.props.addSongToPlaylist(songName, playlistName);
   };
   render() {
     return (
@@ -128,10 +139,57 @@ export class Album extends Component {
                           </Link>
                         </div>
                       </div>
-                      <div>
-                        <p style={{ color: "white", fontSize: "12px" }}>
-                          {(track.duration / 60).toFixed(2)}{" "}
-                        </p>
+                      <div id="moreOptions">
+                        <Dropdown>
+                          <Dropdown.Toggle className="d-flex">
+                            <p style={{ color: "white", fontSize: "12px" }}>
+                              {(track.duration / 60).toFixed(2)}
+                            </p>
+                            <FaEllipsisH />
+                          </Dropdown.Toggle>
+                          <Dropdown.Menu>
+                            <Dropdown.Item>Pin to profile</Dropdown.Item>
+                            <Dropdown.Item>Embed Tweet</Dropdown.Item>
+                            <Dropdown.Item
+                              id="showPlaylists"
+                              onMouseEnter={this.showPlaylistsHandler}
+                              onMouseLeave={this.hidePlaylistsHandler}
+                            >
+                              <MdKeyboardArrowLeft />
+                              Add to Playlist
+                            </Dropdown.Item>
+                            {this.state.showPlaylists ? (
+                              <div
+                                id="playlists"
+                                onMouseEnter={this.showPlaylistsHandler}
+                                onMouseLeave={this.hidePlaylistsHandler}
+                              >
+                                <p>Create a playlist</p>
+                                <hr
+                                  style={{
+                                    margin: "0.2rem -11px",
+                                    borderTop: "1px solid white",
+                                  }}
+                                />
+
+                                {this.props.playlists
+                                  ? this.props.playlists.map((playlist) => (
+                                      <p
+                                        onClick={() =>
+                                          this.addSongToPlaylist(
+                                            playlist.name,
+                                            track.title
+                                          )
+                                        }
+                                      >
+                                        {playlist.name}
+                                      </p>
+                                    ))
+                                  : null}
+                              </div>
+                            ) : null}
+                          </Dropdown.Menu>
+                        </Dropdown>
                       </div>
                     </div>
                   </>
@@ -145,7 +203,6 @@ export class Album extends Component {
             >
               <Toast.Header>
                 <span>
-                  {console.log(this.state.lastTrack)}
                   <strong>{this.state.lastTrack}</strong> added to the playlist
                 </span>
               </Toast.Header>

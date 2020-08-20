@@ -117,10 +117,10 @@ class SideBar extends React.Component {
           </ul>
           <div id="playlists">
             <div>
+              <p>PLAYLISTS</p>
               <AiOutlinePlusCircle
                 onClick={() => this.setState({ showPlaylistModal: true })}
               />
-              <p>Playlists</p>
             </div>
             <div>
               {this.props.playlists.length > 0

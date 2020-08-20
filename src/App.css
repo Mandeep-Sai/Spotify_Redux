@@ -43,17 +43,19 @@
 }
 #sidebar #playlists > div:first-of-type {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 #sidebar #playlists > div:first-of-type svg {
-  margin: 5px 0px 0px -15px;
+  margin: 10px 0px;
   font-size: 16px;
 }
 #sidebar #playlists > div:first-of-type svg:hover {
   cursor: pointer;
 }
-#sidebar #playlists > div:first-of-type p {
-  margin-left: 10px;
+#sidebar #playlists p {
+  margin: 0px;
+  margin-left: 0px;
+  margin-top: 5px;
 }
 #sidebar #playlistModal {
   padding: 20px;
