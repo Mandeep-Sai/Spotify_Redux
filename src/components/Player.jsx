@@ -79,8 +79,11 @@ class Player extends Component {
       }
     }
   }
+  replaySong = (e) => {
+    e.target.currentTime = 0;
+    this.setState({ currentTime: 0, progressBarWidth: 0 });
+  };
   render() {
-    console.log(this.props.img);
     const currentTime = getTime(this.state.currentTime);
     const duration = getTime(this.state.duration);
     return (
@@ -114,15 +117,16 @@ class Player extends Component {
               ) : (
                 <a>
                   <FaHeart
-                    style={{ color: "white", cursor: "pointer" }}
+                    style={{
+                      color: "white",
+                      cursor: "pointer",
+                    }}
                     onClick={() =>
                       this.props.liked_Song(this.props.selectedSong.track.title)
                     }
                   />
                 </a>
               )}
-
-              {/* <i className="fas fa-laptop"></i> */}
             </div>
           ) : (
             <div id="songInfo">
@@ -153,7 +157,7 @@ class Player extends Component {
                   />
                 )}
                 <FaArrowRight />
-                <FaRedoAlt />
+                <FaRedoAlt onClick={this.replaySong} />
               </IconContext.Provider>
             </div>
             <div className="d-flex time">

@@ -11,6 +11,7 @@ import Album from "./components/Album";
 import searchResults from "./components/searchResults";
 import Playlist from "./components/Playlist";
 import OwnPlaylist from "./components/OwnPlaylist";
+import LyricsFloater from "./components/LyricsFloater";
 
 class App extends React.Component {
   // state = {
@@ -29,6 +30,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
+        <LyricsFloater />
         <SideBar />
         <Route path="/" exact component={Home} />
         <Route path="/artists/:id" component={Artist} />

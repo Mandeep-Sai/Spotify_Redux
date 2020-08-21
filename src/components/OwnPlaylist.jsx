@@ -85,7 +85,6 @@ class OwnPlaylist extends Component {
                           <p
                             onClick={() => {
                               this.props.selectedSong(track, img);
-
                               // this.popOverToggle()
                               // this.setState({lastTrack: track.title})
                             }}

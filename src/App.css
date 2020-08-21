@@ -218,6 +218,9 @@
   margin: 0;
   padding: 0;
 }
+#songInfo a {
+  padding-top: 10px;
+}
 #song {
   margin: 5px;
   padding-left: 10px;
@@ -239,6 +242,10 @@
   padding: 0 5px;
   font-size: 26px;
 }
+.musicIcons #icons .playerIcons:hover {
+  cursor: pointer;
+  color: rgb(26, 207, 90);
+}
 #trackLength {
   height: 2px !important;
   width: 400px;
@@ -257,9 +264,12 @@
 }
 #volumeLength {
   width: 60px;
-  height: 5px;
-  margin-top: 11px;
+  height: 2px;
+  margin-top: 14px;
   margin-left: 3px;
+}
+#volume .progress-bar {
+  height: 2px !important;
 }
 .mobileSongInfo {
   display: none !important;
@@ -358,4 +368,38 @@
 }
 .cardsContainer .row {
   margin-top: 20px;
+}
+/* floater for lyrics */
+#lyricsFloater {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  height: 50px;
+  width: 50px;
+  background-color: rgb(26, 207, 90);
+  z-index: 20;
+  border-radius: 40px;
+}
+#lyricsFloater svg {
+  font-size: 50px;
+  color: black;
+}
+#lyricsFloater svg:hover {
+  cursor: pointer;
+}
+#lyrics {
+  position: absolute;
+  width: 500px;
+  height: 80vh;
+  right: 80px;
+  top: 20px;
+  z-index: 20;
+  color: white;
+  background-color: black;
+  padding: 10px;
+  border-radius: 10px;
+  overflow: auto !important;
+}
+#lyrics::-webkit-scrollbar {
+  display: none;
 }
