@@ -23,13 +23,32 @@ export class CardsContainer extends Component {
     return (
       <Container id="cardsContainer">
         <Row className="rows row-cols-xs-2 row-cols-md-3 row-cols-lg-5 ">
-          {this.state.data.length > 0
+          {this.state.data.length > 0 && this.props.for === "artistAlbums"
             ? this.state.data.map((element) => {
                 return (
                   <Col className="mt-4">
                     <Link to={`/showAlbum/${element.id}`}>
                       <Card>
                         <Card.Img variant="top" src={element.cover_medium} />
+                        <Card.Body className="cardBody">
+                          <p>{element.title}</p>
+                        </Card.Body>
+                      </Card>
+                    </Link>
+                  </Col>
+                );
+              })
+            : null}
+          {this.state.data.length > 0 && this.props.for === "search"
+            ? this.state.data.map((element) => {
+                return (
+                  <Col className="mt-4 ">
+                    <Link to={`/showAlbum/${element.album.id}`}>
+                      <Card>
+                        <Card.Img
+                          variant="top"
+                          src={element.album.cover_medium}
+                        />
                         <Card.Body className="cardBody">
                           <p>{element.title}</p>
                         </Card.Body>

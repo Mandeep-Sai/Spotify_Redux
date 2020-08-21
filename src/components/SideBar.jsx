@@ -48,11 +48,6 @@ class SideBar extends React.Component {
     playlistName: "",
     playlists: "",
   };
-  searchQuery = (e) => {
-    let query = e.currentTarget.value;
-    console.log(query);
-    this.props.history.push("/searchResults/" + query);
-  };
 
   handleClose = () => {
     this.setState({ showPlaylistModal: false });
@@ -105,15 +100,6 @@ class SideBar extends React.Component {
                 <a href="album.html">Your Library</a>
               </div>
             </div>
-            <Form inline>
-              <FormControl
-                type="text"
-                placeholder="Search"
-                onChange={this.searchQuery}
-                className="mr-sm-2"
-              />
-              {/* <Button variant="outline-success"><FaSearch/></Button> */}
-            </Form>
           </ul>
           <div id="playlists">
             <div>

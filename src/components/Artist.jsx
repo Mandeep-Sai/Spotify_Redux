@@ -71,7 +71,7 @@ export class Artist extends Component {
             ) : (
               <CardsContainer
                 link={`https://api.deezer.com/artist/${this.props.match.params.id}/albums`}
-                type="artistAlbums"
+                for="artistAlbums"
               />
             )}
           </div>

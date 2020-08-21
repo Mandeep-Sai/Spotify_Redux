@@ -37,8 +37,7 @@ class App extends React.Component {
         <Route path="/playlist/:id" component={Playlist} />
         <Route path="/ownplaylist/:name" component={OwnPlaylist} />
         <Route path="/showAlbum/:id" component={Album} />
-        <Route path="/searchResults/:text" component={searchResults} />
-        <Route path="/searchResults/" exact component={Home} />
+        <Route path="/search/:text" component={searchResults} />
         <Player
         // song={this.state.song}
         // artist={this.state.artist}

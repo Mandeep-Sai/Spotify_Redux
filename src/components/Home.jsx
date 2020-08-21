@@ -1,14 +1,9 @@
 import React, { Component } from "react";
 import { FaSpotify, FaSearch } from "react-icons/fa";
-import {
-  Container,
-  Nav,
-  Navbar,
-  FormControl,
-  Button,
-  Form,
-} from "react-bootstrap";
+import { FiSearch } from "react-icons/fi";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import Carsl from "./Carsl";
+import { withRouter } from "react-router-dom";
 
 export class Home extends Component {
   state = {
@@ -17,6 +12,9 @@ export class Home extends Component {
   query = (e) => {
     let queryText = e.currentTarget.value;
     this.setState({ queryText });
+  };
+  searchQuery = () => {
+    this.props.history.push(`/search/${this.state.queryText}`);
   };
   render() {
     return (
@@ -42,7 +40,10 @@ export class Home extends Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-
+        <div id="searchBox">
+          <input type="text" onChange={this.query} />
+          <FiSearch onClick={this.searchQuery} />
+        </div>
         <Container className="contentRows mt-5">
           <Carsl
             link="https://api.deezer.com/chart/0/albums"
@@ -70,4 +71,4 @@ export class Home extends Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);
