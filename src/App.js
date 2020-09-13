@@ -12,6 +12,10 @@ import searchResults from "./components/searchResults";
 import Playlist from "./components/Playlist";
 import OwnPlaylist from "./components/OwnPlaylist";
 import LyricsFloater from "./components/LyricsFloater";
+import { connect } from "react-redux";
+import Register from "./components/Register";
+
+const mapStateToProps = (state) => state;
 
 class App extends React.Component {
   // state = {
@@ -31,21 +35,19 @@ class App extends React.Component {
     return (
       <Router>
         <LyricsFloater />
-        <SideBar />
-        <Route path="/" exact component={Home} />
+        {this.props.username && <SideBar />}
+
+        <Route path="/home" exact component={Home} />
+        <Route path="/" exact component={Register} />
         <Route path="/artists/:id" component={Artist} />
         <Route path="/playlist/:id" component={Playlist} />
         <Route path="/ownplaylist/:name" component={OwnPlaylist} />
         <Route path="/showAlbum/:id" component={Album} />
         <Route path="/search/:text" component={searchResults} />
-        <Player
-        // song={this.state.song}
-        // artist={this.state.artist}
-        // img={this.state.img}
-        />
+        {this.props.username && <Player />}
       </Router>
     );
   }
 }
 
-export default App;
+export default connect(mapStateToProps)(App);
