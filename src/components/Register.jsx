@@ -24,23 +24,23 @@ export class Register extends Component {
   updateRecheckEmail = (e) => {
     this.setState({ emailCheck: e.currentTarget.value });
   };
-  sendInfo = async () => {
-    let response = await fetch("http://127.0.0.1:3003/users/register", {
+  register = async () => {
+    let response = await fetch("http://localhost:3003/users/register", {
       method: "POST",
+      credentials: "include",
       body: JSON.stringify(this.state.formInfo),
       headers: new Headers({
         "content-type": "application/json",
       }),
     });
     if (response.ok) {
-      alert("Added");
+      console.log("hello");
+      window.location.href = "/home";
     } else {
       alert("Error");
     }
   };
-  registerWithGoogle = async () => {
-    let response = await fetch("http://localhost:3003/users/googleLogin");
-  };
+
   render() {
     return (
       <Container id="register">
@@ -52,44 +52,52 @@ export class Register extends Component {
           <button id="googleRegister">REGISTER WITH GOOGLE</button>
         </a>
         <hr />
-        <p>Register with your email address</p>
-        <div id="blocks">
-          <p>What is your email address</p>
-          <input
-            type="text"
-            id="email"
-            placeholder="Enter your email address"
-            onChange={this.updateForm}
-          />
-        </div>
-        <div id="blocks">
-          <p>Confirm email address</p>
-          <input
-            type="text"
-            placeholder="Re-enter your email address"
-            onChange={this.updateRecheckEmail}
-            id="emailCheck"
-          />
-        </div>
-        <div id="blocks">
-          <p>Create a password</p>
-          <input
-            type="password"
-            id="password"
-            placeholder="Create a password"
-            onChange={this.updateForm}
-          />
-        </div>
-        <div id="blocks">
-          <p>What shall we call you</p>
-          <input
-            type="text"
-            id="username"
-            placeholder="Enter a profile name"
-            onChange={this.updateForm}
-          />
-        </div>
-        <button id="registerButton">TO REGISTER</button>
+        <form>
+          <p>Register with your email address</p>
+          <div id="blocks">
+            <p>What is your email address</p>
+            <input
+              type="text"
+              id="email"
+              placeholder="Enter your email address"
+              onChange={this.updateForm}
+              required
+            />
+          </div>
+          <div id="blocks">
+            <p>Confirm email address</p>
+            <input
+              type="text"
+              placeholder="Re-enter your email address"
+              onChange={this.updateRecheckEmail}
+              id="emailCheck"
+              required
+            />
+          </div>
+          <div id="blocks">
+            <p>Create a password</p>
+            <input
+              type="password"
+              id="password"
+              placeholder="Create a password"
+              onChange={this.updateForm}
+              required
+            />
+          </div>
+          <div id="blocks">
+            <p>What shall we call you</p>
+            <input
+              type="text"
+              id="username"
+              placeholder="Enter a profile name"
+              onChange={this.updateForm}
+              required
+            />
+          </div>
+          <button id="registerButton" type="submit" onClick={this.register}>
+            TO REGISTER
+          </button>
+        </form>
         <p>
           You already have an account? <a href="/signIn">Sign in</a>{" "}
         </p>

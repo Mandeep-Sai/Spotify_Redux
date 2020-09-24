@@ -25,7 +25,12 @@ export class LyricsFloater extends Component {
         let parsedResponse = await response.json();
         let track_id = parsedResponse.message.body.track_list[0].track.track_id;
         let lyricsResponse = await fetch(
-          `https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${track_id}&apikey=56b82d61a05bfc23ab44eac6c8732117`
+          `https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${track_id}&apikey=56b82d61a05bfc23ab44eac6c8732117`,
+          {
+            headers: new Headers({
+              "Access-Control-Allow-Origin": "http://127.0.0.1:3000",
+            }),
+          }
         );
         let parsedLyricsResponse = await lyricsResponse.json();
         let lyrics = parsedLyricsResponse.message.body.lyrics.lyrics_body;

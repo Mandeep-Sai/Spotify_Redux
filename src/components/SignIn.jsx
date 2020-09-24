@@ -2,8 +2,19 @@ import React, { Component } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import "../styles/Register.css";
 import { FaSpotify, FaSearch, FaHome, FaBookOpen } from "react-icons/fa";
-import { AiOutlinePlusCircle, AiOutlineClose } from "react-icons/ai";
-import { IconContext } from "react-icons";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
+const mapStateToProps = (state) => state;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadUser: (user) =>
+      dispatch({
+        type: "LOAD_USER",
+        payload: user,
+      }),
+  };
+};
 
 export class SignIn extends Component {
   constructor(props) {
@@ -21,16 +32,20 @@ export class SignIn extends Component {
     formInfo[id] = e.currentTarget.value;
     this.setState({ formInfo });
   };
-  sendInfo = async () => {
-    let response = await fetch("http://127.0.0.1:3003/users/register", {
+  loginHandler = async () => {
+    let response = await fetch("http://127.0.0.1:3003/users/login", {
       method: "POST",
+      credentials: "include",
       body: JSON.stringify(this.state.formInfo),
       headers: new Headers({
         "content-type": "application/json",
       }),
     });
     if (response.ok) {
-      alert("Added");
+      const user = await response.json();
+      console.log(user);
+      this.props.loadUser(user);
+      this.props.history.push("/home");
     } else {
       alert("Error");
     }
@@ -76,7 +91,9 @@ export class SignIn extends Component {
             Remember me
           </div>
 
-          <button id="registerButton">LOG IN</button>
+          <button id="registerButton" onClick={this.loginHandler}>
+            LOG IN
+          </button>
         </div>
         <hr />
         <p>Doesn't have an account?</p>
@@ -88,4 +105,4 @@ export class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignIn));

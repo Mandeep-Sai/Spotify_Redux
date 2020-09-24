@@ -8,16 +8,6 @@ import { connect } from "react-redux";
 import SideBar from "./SideBar";
 import Player from "./Player";
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loadUser: (user) =>
-      dispatch({
-        type: "LOAD_USER",
-        payload: user,
-      }),
-  };
-};
-
 export class Home extends Component {
   state = {
     queryText: "edsheeran",
@@ -29,14 +19,7 @@ export class Home extends Component {
   searchQuery = () => {
     this.props.history.push(`/search/${this.state.queryText}`);
   };
-  componentDidMount = async () => {
-    let response = await fetch("http://localhost:3003/users/me", {
-      method: "GET",
-      credentials: "include",
-    });
-    let user = await response.json();
-    this.props.loadUser(user);
-  };
+
   render() {
     return (
       <>
@@ -102,4 +85,4 @@ export class Home extends Component {
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(Home));
+export default withRouter(Home);
