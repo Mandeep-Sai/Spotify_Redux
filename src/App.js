@@ -14,6 +14,7 @@ import OwnPlaylist from "./components/OwnPlaylist";
 import LyricsFloater from "./components/LyricsFloater";
 import { connect } from "react-redux";
 import Register from "./components/Register";
+import SignIn from "./components/SignIn";
 
 const mapStateToProps = (state) => state;
 
@@ -39,6 +40,7 @@ class App extends React.Component {
 
         <Route path="/home" exact component={Home} />
         <Route path="/" exact component={Register} />
+        <Route path="/signIn" exact component={SignIn} />
         <Route path="/artists/:id" component={Artist} />
         <Route path="/playlist/:id" component={Playlist} />
         <Route path="/ownplaylist/:name" component={OwnPlaylist} />
