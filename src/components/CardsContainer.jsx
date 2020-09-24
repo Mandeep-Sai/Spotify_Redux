@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import SideBar from "./SideBar";
 
 export class CardsContainer extends Component {
   constructor(props) {

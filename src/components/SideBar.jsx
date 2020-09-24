@@ -85,7 +85,7 @@ class SideBar extends React.Component {
                 <IconContext.Provider value={{ className: "sidebarIcons" }}>
                   <FaHome />
                 </IconContext.Provider>
-                <a href="/">Home</a>
+                <a href="/home">Home</a>
               </div>
               <div className="d-flex">
                 <IconContext.Provider value={{ className: "sidebarIcons" }}>
@@ -119,34 +119,42 @@ class SideBar extends React.Component {
                 : null}
             </div>
           </div>
-          <div id="buttons">
-            <div id="signUp">
-              {/* <Link to='/signup'> */}
-              <button
-                type="button"
-                onClick={this.handleShow}
-                className="btn btn-block"
-              >
-                <p>SIGN UP</p>
-              </button>
-              {/* </Link> */}
-            </div>
-            <div id="login">
-              <button type="button" className="btn btn-block">
-                <p>LOGIN</p>
-              </button>
-            </div>
-            <div id="sidebar-footer">
-              <div className="footer">
-                <p>Cookie</p>
-                <p>|</p>
-                <p>Privacy</p>
+          {!this.props.user ? (
+            <div id="buttons">
+              <div id="signUp">
+                {/* <Link to='/signup'> */}
+                <button
+                  type="button"
+                  onClick={this.handleShow}
+                  className="btn btn-block"
+                >
+                  <p>SIGN UP</p>
+                </button>
+                {/* </Link> */}
               </div>
-              <div style={{ marginTop: "-15px", marginLeft: "5px" }}>
-                <p style={{ fontSize: "12px" }}>Policy</p>
+              <div id="login">
+                <button type="button" className="btn btn-block">
+                  <p>LOGIN</p>
+                </button>
+              </div>
+              <div id="sidebar-footer">
+                <div className="footer">
+                  <p>Cookie</p>
+                  <p>|</p>
+                  <p>Privacy</p>
+                </div>
+                <div style={{ marginTop: "-15px", marginLeft: "5px" }}>
+                  <p style={{ fontSize: "12px" }}>Policy</p>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div id="welcome">
+              <p>
+                Welcome <span>{this.props.user.username}</span>
+              </p>
+            </div>
+          )}
         </nav>
         <Modal
           isOpen={this.state.showPlaylistModal}
@@ -172,45 +180,6 @@ class SideBar extends React.Component {
             <button onClick={this.createPlaylistHandler}>Create</button>
           </div>
         </Modal>
-        {/*
-        <Modal
-          show={this.state.show}
-          onHide={this.handleClose}
-          backdrop="static"
-          keyboard={false}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Sign Up</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Form.Row>
-                <Col>
-                  <Form.Control
-                    onChange={this.updateUser}
-                    placeholder="username"
-                    type="text"
-                  />
-                </Col>
-                <Col>
-                  <Form.Control placeholder="password" type="password" />
-                </Col>
-              </Form.Row>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="primary"
-              onClick={() => {
-                this.props.loadUser(this.state.username);
-                this.handleClose();
-              }}
-            >
-              Sign Up
-            </Button>
-          </Modal.Footer>
-        </Modal>
-            */}
       </>
     );
   }

@@ -26,7 +26,7 @@ export default function (state = {}, action) {
     case "LOAD_USER":
       return {
         ...state,
-        username: action.payload,
+        user: action.payload,
       };
     case "ADD_PLAYLIST":
       return {

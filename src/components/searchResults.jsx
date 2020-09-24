@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Container, Spinner } from "react-bootstrap";
 import CardsContainer from "./CardsContainer";
+import SideBar from "./SideBar";
+import Player from "./Player";
 
 class searchResults extends Component {
   state = {
@@ -24,26 +26,30 @@ class searchResults extends Component {
   };
   render() {
     return (
-      <Container fluid id="content">
-        <Container className="contentRows mt-5">
-          <p>Search results for "{this.state.query}"</p>
-          {!this.state.loading ? (
-            <CardsContainer
-              link={`https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${this.state.query}`}
-              for="search"
-            />
-          ) : (
-            /* <Carsl name={this.state.queryText} /> */
-            <Spinner
-              animation="border"
-              variant="light"
-              style={{ position: "absolute", top: "50%", left: "50%" }}
-            >
-              <span className="sr-only">Loading...</span>
-            </Spinner>
-          )}
+      <>
+        <SideBar />
+        <Container fluid id="content">
+          <Container className="contentRows mt-5">
+            <p>Search results for "{this.state.query}"</p>
+            {!this.state.loading ? (
+              <CardsContainer
+                link={`https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${this.state.query}`}
+                for="search"
+              />
+            ) : (
+              /* <Carsl name={this.state.queryText} /> */
+              <Spinner
+                animation="border"
+                variant="light"
+                style={{ position: "absolute", top: "50%", left: "50%" }}
+              >
+                <span className="sr-only">Loading...</span>
+              </Spinner>
+            )}
+          </Container>
         </Container>
-      </Container>
+        <Player />
+      </>
     );
   }
 }

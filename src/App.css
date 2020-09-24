@@ -177,6 +177,15 @@
   color: rgb(26, 207, 90);
   transition: all 0.2s ease-in-out;
 }
+#sidebar #welcome {
+  margin-top: auto;
+  text-align: center;
+}
+#sidebar #welcome span {
+  font-size: 18px;
+  text-transform: uppercase;
+  color: rgb(26, 207, 90);
+}
 /* Modal */
 .modal-title {
   margin-left: 40% !important;

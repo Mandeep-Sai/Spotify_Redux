@@ -3,7 +3,6 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Artist.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import SideBar from "./components/SideBar";
 import Player from "./components/Player";
 import Home from "./components/Home";
 import Artist from "./components/Artist";
@@ -36,7 +35,6 @@ class App extends React.Component {
     return (
       <Router>
         <LyricsFloater />
-        {this.props.username && <SideBar />}
 
         <Route path="/home" exact component={Home} />
         <Route path="/" exact component={Register} />
@@ -46,7 +44,6 @@ class App extends React.Component {
         <Route path="/ownplaylist/:name" component={OwnPlaylist} />
         <Route path="/showAlbum/:id" component={Album} />
         <Route path="/search/:text" component={searchResults} />
-        {this.props.username && <Player />}
       </Router>
     );
   }

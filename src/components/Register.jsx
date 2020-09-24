@@ -38,6 +38,9 @@ export class Register extends Component {
       alert("Error");
     }
   };
+  registerWithGoogle = async () => {
+    let response = await fetch("http://localhost:3003/users/googleLogin");
+  };
   render() {
     return (
       <Container id="register">
@@ -45,7 +48,9 @@ export class Register extends Component {
           <FaSpotify />
           <p>Spotify</p>
         </div>
-        <button id="fbRegister">REGISTER WITH FACEBOOK</button>
+        <a href="http://localhost:3003/users/googleLogin">
+          <button id="googleRegister">REGISTER WITH GOOGLE</button>
+        </a>
         <hr />
         <p>Register with your email address</p>
         <div id="blocks">
