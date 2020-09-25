@@ -2,6 +2,19 @@ import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import "../styles/Register.css";
 import { FaSpotify } from "react-icons/fa";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
+const mapStateToProps = (state) => state;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadUser: (user) =>
+      dispatch({
+        type: "LOAD_USER",
+        payload: user,
+      }),
+  };
+};
 
 export class Register extends Component {
   constructor(props) {
@@ -34,8 +47,9 @@ export class Register extends Component {
       }),
     });
     if (response.ok) {
-      console.log("hello");
-      window.location.href = "/home";
+      const user = response.json();
+      this.props.loadUser(user);
+      this.props.history.push("/home");
     } else {
       alert("Error");
     }
@@ -106,4 +120,6 @@ export class Register extends Component {
   }
 }
 
-export default Register;
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Register)
+);
