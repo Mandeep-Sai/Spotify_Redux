@@ -57,7 +57,7 @@ export class SignIn extends Component {
           <FaSpotify />
           <p>Spotify</p>
         </div>
-        <button id="fbRegister">CONTINUE WITH FACEBOOK</button>
+        <button id="fbRegister">CONTINUE WITH GOOGLE</button>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <hr style={{ marginLeft: "0px", width: "40%", marginTop: "12px" }} />
           <p style={{ margin: "0px" }}> OR</p>
