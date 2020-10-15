@@ -54,7 +54,6 @@ export class Album extends Component {
     let album = await response.json();
     console.log(album);
     this.setState({ album, loading: false });
-    // this.props.addSongToPlaylist("abc", "man");
   };
 
   popOverToggle = () => {
@@ -74,6 +73,7 @@ export class Album extends Component {
   };
   addSongToPlaylist = (playlistName, songName) => {
     this.props.addSongToPlaylist(songName, playlistName);
+  
   };
   render() {
     return (

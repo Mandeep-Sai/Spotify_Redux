@@ -104,6 +104,11 @@ input[type="checkbox"]:checked:after {
   color: #767676;
   font-weight: 600;
 }
-#register #signup:focus {
+#register #signup:focus,
+#register #registerButton {
   outline: none;
+}
+#register #signup:hover {
+  background-color: #616467;
+  color: white;
 }

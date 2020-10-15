@@ -128,7 +128,6 @@ export class Playlist extends Component {
               >
                 <Toast.Header>
                   <span>
-                    {console.log(this.state.lastTrack)}
                     <strong>{this.state.lastTrack}</strong> added to the
                     playlist
                   </span>
