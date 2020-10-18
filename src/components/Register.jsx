@@ -37,7 +37,8 @@ export class Register extends Component {
   updateRecheckEmail = (e) => {
     this.setState({ emailCheck: e.currentTarget.value });
   };
-  register = async () => {
+  register = async (e) => {
+    e.preventDefault();
     let response = await fetch("https://spotifybe.herokuapp.com/users/register", {
       method: "POST",
       credentials: "include",

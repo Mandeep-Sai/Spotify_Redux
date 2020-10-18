@@ -32,7 +32,8 @@ export class SignIn extends Component {
     formInfo[id] = e.currentTarget.value;
     this.setState({ formInfo });
   };
-  loginHandler = async () => {
+  loginHandler = async (e) => {
+    e.preventDefault()
     let response = await fetch("https://spotifybe.herokuapp.com/users/login", {
       method: "POST",
       credentials: "include",
