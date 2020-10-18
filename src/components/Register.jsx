@@ -38,7 +38,7 @@ export class Register extends Component {
     this.setState({ emailCheck: e.currentTarget.value });
   };
   register = async () => {
-    let response = await fetch("http://localhost:3003/users/register", {
+    let response = await fetch("https://spotifybe.herokuapp.com/users/register", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify(this.state.formInfo),
@@ -62,7 +62,7 @@ export class Register extends Component {
           <FaSpotify />
           <p>Spotify</p>
         </div>
-        <a href="http://localhost:3003/users/googleLogin">
+        <a href="https://spotifybe.herokuapp.com/users/googleLogin">
           <button id="googleRegister">REGISTER WITH GOOGLE</button>
         </a>
         <hr />
