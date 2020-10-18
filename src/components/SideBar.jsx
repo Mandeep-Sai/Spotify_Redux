@@ -1,6 +1,6 @@
 import React from "react";
 import { FaSpotify, FaSearch, FaHome, FaBookOpen } from "react-icons/fa";
-import { AiOutlinePlusCircle, AiOutlineClose } from "react-icons/ai";
+import { AiOutlinePlusCircle, AiOutlineClose, AiFillDelete } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import { Form, FormControl, Button, Col, Row } from "react-bootstrap";
 import { withRouter, Link } from "react-router-dom";
@@ -17,6 +17,10 @@ const mapDispatchToProps = (dispatch) => {
         payload: name,
       }),
     createPlaylist: (playlists) => dispatch(addplaylist(playlists)),
+    deletePlaylist:(name)=> dispatch({
+      type: "DELETE_PLAYLIST",
+      payload: name,
+    })
   };
 };
 const addplaylist = (playlists) => {
@@ -41,13 +45,25 @@ const customStyles = {
 };
 
 class SideBar extends React.Component {
-  state = {
-    query: "",
-    username: "",
-    showPlaylistModal: false,
-    playlistName: "",
-    playlists: "",
-  };
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       
+      query: "",
+      username: "",
+      showPlaylistModal: this.props.show,
+      playlistName: "",
+      playlists: "",
+    }
+  }
+  componentDidUpdate=(prevProps) => {
+    if(this.props.show !== prevProps.show){
+      console.log("bitch");
+      this.setState({showPlaylistModal:this.props.show})
+    }
+  }
+
 
   handleClose = () => {
     this.setState({ showPlaylistModal: false });
@@ -111,10 +127,13 @@ class SideBar extends React.Component {
             <div>
               {this.props.playlists.length > 0
                 ? this.props.playlists.map((playlist) => (
+                  <div style={{display:"flex",justifyContent:"space-between"}}>
                     <Link to={`/ownplaylist/${playlist.name}`}>
                       {" "}
                       <p>{playlist.name}</p>
                     </Link>
+                    <AiFillDelete style={{marginTop:"10px"}} onClick={()=>this.props.deletePlaylist(playlist.name)}/>
+                    </div>
                   ))
                 : null}
             </div>

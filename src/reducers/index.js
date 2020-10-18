@@ -33,6 +33,17 @@ export default function (state = {}, action) {
         ...state,
         playlists: [...state.playlists.concat(action.payload)],
       };
+    case "DELETE_PLAYLIST":
+      const playlistIndx = state.playlists.findIndex(
+        (obj) => obj.name === action.payload
+      );
+      return{
+        ...state,
+        playlists: [
+          ...state.playlists.slice(0, playlistIndx),
+          ...state.playlists.slice(playlistIndx + 1),
+        ],
+      }
     case "ADD_SONG_TO_PLAYLIST":
       const playlistIndex = state.playlists.findIndex(
         (obj) => obj.name === action.payload.playlistName

@@ -34,8 +34,9 @@ export class Album extends Component {
     album: [],
     loading: true,
     showPopover: false,
-    lastTrack: undefined,
+    lastTrack: "",
     showPlaylists: false,
+    showPlaylistModal:false,
   };
   componentDidMount = async () => {
     let id = this.props.match.params.id;
@@ -73,12 +74,16 @@ export class Album extends Component {
   };
   addSongToPlaylist = (playlistName, songName) => {
     this.props.addSongToPlaylist(songName, playlistName);
+    this.setState({ showPopover: true});
+    setTimeout(() => {
+      this.setState({ showPopover: false });
+    }, 1500);
   
   };
   render() {
     return (
       <>
-        <SideBar />
+        <SideBar show={this.state.showPlaylistModal} />
         <Container fluid id="content">
           {this.state.loading ? (
             <Spinner
@@ -169,7 +174,7 @@ export class Album extends Component {
                                   onMouseEnter={this.showPlaylistsHandler}
                                   onMouseLeave={this.hidePlaylistsHandler}
                                 >
-                                  <p>Create a playlist</p>
+                                  <p onClick={()=>this.setState({showPlaylistModal:true})}>Create a playlist</p>
                                   <hr
                                     style={{
                                       margin: "0.2rem -11px",
@@ -201,22 +206,20 @@ export class Album extends Component {
                   );
                 })}
               </div>
-              <Toast
-                style={{ position: "fixed", top: 15, right: 15 }}
-                show={this.state.showPopover}
-                onClose={this.popOverToggle}
-              >
-                <Toast.Header>
-                  <span>
-                    <strong>{this.state.lastTrack}</strong> added to the
-                    playlist
-                  </span>
-                </Toast.Header>
-              </Toast>
             </Row>
           )}
         </Container>
         <Player />
+              <Toast
+                style={{ position: "fixed", top: 15, right: 15 }}
+                show={this.state.showPopover}
+              >
+                <Toast.Header>
+                  <span>
+                    Added sucessfully to the playlist
+                  </span>
+                </Toast.Header>
+              </Toast>
       </>
     );
   }
