@@ -38,6 +38,7 @@ export class SignIn extends Component {
       credentials: "include",
       body: JSON.stringify(this.state.formInfo),
       headers: new Headers({
+        "Access-Control-Allow-Origin": `https://spotifyfe.herokuapp.com`,
         "content-type": "application/json",
       }),
     });
