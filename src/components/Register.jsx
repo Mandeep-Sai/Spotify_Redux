@@ -49,7 +49,7 @@ export class Register extends Component {
       }),
     });
     if (response.ok) {
-      const user = response.json();
+      const user =await response.json();
       this.props.loadUser(user);
       this.props.history.push("/home");
     } else {
